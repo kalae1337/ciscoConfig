@@ -1,0 +1,120 @@
+alapconfig(szepen)
+alapkonfig kezdete
+enable - en
+configure terminal - conf t
+line console 0
+password titok
+login
+show running-config (space)
+#itt van alul egy more
+service password-encryption  titkositas
+config modban: do show running-config
+
+banner: figyelmezteto (message of the day)
+banner motd #...# 
+2db kulonleges karakter
+
+copy running-config startup-config
+copy run sta
+
+telnet beallitas
+line vty 5 15
+pw
+login
+do copy run sta
+sh run
+
+enable password titok
+enable secret titok
+en secret azonnal titkositott lesz
+
+hostname R1
+ip domain-name suli.lan
+do sh ip ssh
+ip ssh version 2
+crypto key generate rsa
+1024 bit
+
+username admin secret titok
+vonali portok megadas:
+line vty 0 4
+login local
+
+kulcs importalas, veglegesites
+transport input ssh
+vege
+
+ip cim
+router port alapbol kikapcsolva
+interface lekerdezes (portok)
+show ip interface brief
+ sh ip int brief
+routing tabla
+show ip route
+	(EIGRP OSPF RIP)
+interface gigabit0/0
+ int g0/0
+ip address 192.168.10.0 255.255.255.0
+port felkapcs
+no shut down
+ no shut
+
+int s0/0/0
+ip address 1.1.1.2 255.255.255.252
+
+ip cim torlese
+no ip address
+
+isco startup konfig torles
+erase startup-config
+reload
+
+crypto key zeroize rsa
+
+cisco vonal letiltas
+transport input none
+
+routing
+-statikus
+-dinamikus (Routing Information Protocol) ssh2
+
+cisco routing
+conf t
+ip route (halozati cimek + maszk) kilepo int / next hop
+ip route  1.1.1.0 255.255.255.252 s0/0/1
+ip route 172.16.0.0 255.255.0.0. 2.2.2.2
+
+direct connection routing 0.0.0.0 0.0.0.0 g0/0
+
+
+ do show ip routeban via a nexthop, s a statikusan beallitott
+1. sajat halokartyat ping, utana sorban
+
+dinamikus protokoll rip
+
+conf t
+router rip
+version 2
+network 1.1.1.0 (amiket a router ismer)
+
+#ott a more
+
+dhcp szerver
+routerek kozott nincs, belso halozatokon mukodik
+
+conf t
+ip dhcp excluded-address 172.16.0.1 172.16.0.50 - kizart cimek tartomanya
+ip dhcp pool konyveles
+network 172.16.0.0 255.255.0.0
+dns-server 10.0.0.2
+default-router 172.16.0.1 (alapertelmezett atjaro en vagyok)
+service dhcp - engedelyezi
+
+dns erkezo domain nevet(szit.hu) parositja az ip cimhez, ez alapjan tovabbitja, utana visszaforditja
+
+server services dns 
+A record
+name suli.lan
+address 10.0.0.3
+add
+dns service on
